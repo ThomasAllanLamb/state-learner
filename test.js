@@ -1,6 +1,6 @@
 const assert = require("assert");
-const StateLearner = require("../lib/StateLearner/StateLearner.js");
-const PredictionData = require("../lib/StateLearner/PredictionData.js");
+const StateLearner = require("./StateLearner.js");
+const PredictionData = require("./PredictionData.js");
 
 describe("State Learner", function () {
 

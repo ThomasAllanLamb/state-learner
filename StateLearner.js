@@ -12,7 +12,7 @@ StateLearner
 	
 ****** ***** ******/
 
-const ArrayMap = require("../ArrayMap.js");
+const ArrayMap = require("./ArrayMap.js");
 const PredictionData = require("./PredictionData.js");
 const StateLine = require("./StateLine.js");
 

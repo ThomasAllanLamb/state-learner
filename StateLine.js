@@ -11,8 +11,8 @@ StateLine
 
 ****** ***** ******/
 
-const ArrayMap = require("../ArrayMap.js");
-const IncidenceMap = require("../IncidenceMap.js");
+const ArrayMap = require("./ArrayMap.js");
+const IncidenceMap = require("./IncidenceMap.js");
 
 
 /******** CONSTRUCTOR ********/
