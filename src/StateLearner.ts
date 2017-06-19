@@ -11,10 +11,9 @@ StateLearner
 	
 	
 ****** ***** ******/
-
-const ArrayMap = require("./ArrayMap.js");
-const PredictionData = require("./PredictionData.js");
-const StateLine = require("./StateLine.js");
+import { ArrayMap } from './ArrayMap';
+import { PredictionData } from "./PredictionData.js";
+import { StateLine } from "./StateLine.js";
 
 
 /******** CONSTRUCTOR ********/
@@ -115,5 +114,5 @@ StateLearner.prototype.makePrediction = function ()
 	//recall is 0, so it's impossible to predict anything
 	return undefined;
 }
-
-module.exports = StateLearner;
+var out : Number = 5;
+export out;

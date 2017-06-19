@@ -10,13 +10,13 @@ ArrayMap
 
 ****** ***** ******/
 	
-const Entry = require("./Entry.js");
+import { Entry } from "./Entry.js";
 //try using native Map
 //const Map = require("./Map.js");
 
 /******** CONSTRUCTOR ********/
 
-function ArrayMap () 
+export function ArrayMap () 
 {
 	//UNF: clone elements? If a person messes with the elements of an array they set to have a value, then discard it and make a fresh one, they will expect .get to return the same value. But since they messed with elements of the array before they got rid of it, the elements of the nodes in this map will have changes and the value the user is looking for will no longer have the same key.
 	this._choices = new Map();
@@ -238,5 +238,3 @@ ArrayMap.prototype._calculateSize = function ()
 	
 	this.size = size;
 }
-
-module.exports = ArrayMap;
