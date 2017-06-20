@@ -12,7 +12,7 @@ Entry
 
 export class Entry {
   
-  constructor (key, value)
+  constructor (key:any, value:any)
   {
   	this.key = key;
   	this.value = value;
@@ -20,20 +20,20 @@ export class Entry {
 
   /******** PROPERTIES ********/
 
-  public key;
-  public value;
+  public key:any;
+  public value:any;
 
 
   /******** METHODS ********/
 
-  Entry.prototype.clone = function ()
+  public clone ()
   {
   	return new Entry(this.key.clone(), this.value.clone());
   };
 
-  Entry.prototype.toString = function ()
+  public toString () : string
   {
   	return this.key+"\t=>\t"+this.value;
   };
-
+  
 }
