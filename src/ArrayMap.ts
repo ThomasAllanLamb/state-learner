@@ -61,10 +61,13 @@ export class ArrayMap {
 		}
 	}
 
-	public set (key, value, keyIndex)
+	public set (key, value)
 	{
-		keyIndex = keyIndex || 0;
-		
+		return this.setHelper(key, value, 0);
+	}
+
+	private setHelper (key, value, keyIndex)
+	{
 		if (keyIndex == key.length)
 		{
 			this._nodeValue = value;
@@ -88,7 +91,7 @@ export class ArrayMap {
 			else
 			{
 				let nextNode = new ArrayMap();
-				nextNode.set(key, value, keyIndex+1);
+				nextNode.setHelper(key, value, keyIndex+1);
 				
 				var currentElement = key[keyIndex];
 				this._choices.set(currentElement, nextNode);
@@ -97,7 +100,6 @@ export class ArrayMap {
 				return value;
 			}
 		}
-		
 	}
 
 	public has (key, keyIndex) : boolean
@@ -129,9 +131,13 @@ export class ArrayMap {
 		return this._data.length;
 	});*/
 	//???
-	public forEach (f, baseKey)
+	public forEach (f)
 	{
-		baseKey = baseKey || new Array();
+		return this.forEachHelper(f, []);
+	}
+
+	private forEachHelper (f, baseKey)
+	{
 		if (this._isOccupied)
 		{
 			var entry = new Entry(baseKey, this._nodeValue);
@@ -154,13 +160,11 @@ export class ArrayMap {
 						return result;
 					}
 					baseKey.pop();
-				});
-			
+				});	
 		}
-		return undefined;
 	}
 
-	public clonefunction ()
+	public clone ()
 	{
 		//Diag.trace("ArrayMap.clone():");
 		//Diag.trace("this = "+this);

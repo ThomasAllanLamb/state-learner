@@ -58,7 +58,10 @@ export class StateLearner {
 		}
 		
 		var potentials = new Array();
-		var predictionData = new PredictionData();
+
+		let matchLength : number;
+		let states : Array<any>;
+
 		while (historyFragment.length >= 0)
 		{
 			//at the end of each round, if there is only one potential state, that means that all other potential states have been eliminated in previous iterations, so we return that. As a result, if at the beginning of an iteration, potentials is non-empty, that means that there must have been more than one left at the end of the last iteration. When there is more than one left, that means there was a tie at the end of the last iteration, so we settle that by finding a maximum among potentials in the incidence of this iteration. If potentials is empty, however, we fill it with the maxima of incidence. If we fill potentials with all of incidence when it is empty, we can use the same algorithm when potentials is empty as when it is non-empty.
@@ -70,7 +73,7 @@ export class StateLearner {
 					potentials.push(key);
 				});
 				
-				if (potentials.length >= 1) predictionData.matchLength = historyFragment.length;
+				if (potentials.length >= 1) matchLength = historyFragment.length;
 			}
 			var max = 0;
 			var newPotentials = new Array();
@@ -93,22 +96,19 @@ export class StateLearner {
 
 			if (potentials.length == 1)
 			{
-				predictionData.states = potentials;
-				return predictionData;
+				return new PredictionData(matchLength, potentials);
 			}
 			else if (historyFragment.length == 0)
 			{
 				if (potentials.length == 0)
 				{
 					//because all history including null history has been checked for a match and potentials is still empty, we can infer that there was never any input to begin with.
-					
 					return undefined;
 				}
 				else
 				{
 					//since there hasn't been a solitary maximum found at any level of detail, and the list of potentials is non-empty, we know that there must be a tie between two or more states. By returning the potentials array, the user can choose what to do with the all the relevant information available.
-					predictionData.states = potentials;
-					return predictionData;
+					return new PredictionData(matchLength, potentials);
 				}
 			}
 			

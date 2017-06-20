@@ -3,7 +3,8 @@
     "outDir": "./built",
     "noImplicitReturns": true,
     "target": "ES6",
-    "allowJs": true
+    "allowJs": true,
+    "pretty": true
   },
 
   "include": [
