@@ -27,13 +27,4 @@ export class PredictionData
   public matchLength;
   //The predicted state (or states, in which case this is an array of states)
   public states;
-
-
-  /******** METHODS ********/
-
-  //???
-  public getIsValid = function ()
-  {
-    return (this.matchLength != undefined);
-  }
 }

@@ -11,7 +11,7 @@ StateLearner
 	
 	
 ****** ***** ******/
-import { ArrayMap } from './ArrayMap';
+import { ArrayMap } from './ArrayMap.js';
 import { PredictionData } from "./PredictionData.js";
 import { StateLine } from "./StateLine.js";
 
@@ -30,9 +30,9 @@ export class StateLearner {
 	/******** PROPERTIES ********/
 
 	//Maximum length for a sequence of states to be stored or retrieved
-	public recall;
+	public recall:number;
 	//This state learner's state line
-	private _stateLine;
+	private _stateLine:StateLine;
 
 
 	/******** METHODS ********/
@@ -44,7 +44,7 @@ export class StateLearner {
 		return;
 	}
 
-	public makePrediction ()
+	public makePrediction ():PredictionData
 	{
 		//???: potentials should really be a set, but I just don't have one made yet. But isn't an array sufficient, even better? I'm pretty sure that direct access to an element of an array would be faster than a getter method on a set object by orders of magnitude.
 
