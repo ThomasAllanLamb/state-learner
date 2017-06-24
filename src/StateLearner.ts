@@ -11,9 +11,9 @@ StateLearner
 	
 	
 ****** ***** ******/
-import { ArrayMap } from './ArrayMap.js';
-import { PredictionData } from "./PredictionData.js";
-import { StateLine } from "./StateLine.js";
+import { ArrayMap } from './ArrayMap';
+import { PredictionData } from "./PredictionData";
+import { StateLine } from "./StateLine";
 
 
 /******** CONSTRUCTOR ********/

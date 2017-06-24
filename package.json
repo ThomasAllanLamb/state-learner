@@ -18,7 +18,11 @@
   },
   "homepage": "https://github.com/ThomasAllanLamb/state-learner#readme",
   "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.0",
+    "babel-preset-env": "^1.5.2",
     "mocha": "^3.4.1",
+    "ts-loader": "^2.2.0",
     "webpack": "^2.6.1"
   },
   "types": "./src/main.d.ts"

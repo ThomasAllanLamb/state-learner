@@ -10,7 +10,7 @@ ArrayMap
 
 ****** ***** ******/
 	
-import { Entry } from "./Entry.js";
+import { Entry } from "./Entry";
 //try using native Map
 //const Map = require("./Map.js");
 
