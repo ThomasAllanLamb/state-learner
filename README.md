@@ -5,3 +5,4 @@
 - Add source mapping
 - Add usage instructions
 - Is tsconfig.json necessary?
+- Outsource ArrayMap

@@ -64,11 +64,8 @@ export class StateLearner {
 
 		while (historyFragment.length >= 0)
 		{
-			console.log(historyFragment);
 			//at the end of each round, if there is only one potential state, that means that all other potential states have been eliminated in previous iterations, so we return that. As a result, if at the beginning of an iteration, potentials is non-empty, that means that there must have been more than one left at the end of the last iteration. When there is more than one left, that means there was a tie at the end of the last iteration, so we settle that by finding a maximum among potentials in the incidence of this iteration. If potentials is empty, however, we fill it with the maxima of incidence. If we fill potentials with all of incidence when it is empty, we can use the same algorithm when potentials is empty as when it is non-empty.
 			var incidence = this._stateLine.incidenceFollowing(historyFragment);
-
-			console.log("incidence = "+incidence.size);
 
 			if (potentials.length == 0)
 			{

@@ -29,8 +29,8 @@ export class ArrayMap {
 
 	//UNF: recalculate .size at the end of .set
 	public size;
-	//the next 
-	private _choices;
+	// A map from next elements to ArrayMap objects containing those elements as their leaf. _choices.get(x) === _choices.get(x)._nodeValue
+	private _choices:Map<any, ArrayMap>;
 	//the answer to .get( [] )
 	private _nodeValue;
 	private _isOccupied;
@@ -38,16 +38,8 @@ export class ArrayMap {
 
 	/******** METHODS ********/
 
-	public get (key, test)
+	public get (key, keyIndex = 0)
 	{
-		if (test !== undefined) console.log("test is "+test);
-		return this.getHelper (key, 0);
-	}
-
-	private getHelper (key, keyIndex)
-	{
-		//console.log("get","key = "+key,"\tkeyIndex = "+keyIndex);
-		keyIndex = keyIndex || 0;
 		if (keyIndex == key.length)
 		{
 			return this._nodeValue;
@@ -68,13 +60,12 @@ export class ArrayMap {
 		}
 	}
 
-	public set (key, value)
+	private getHelper (key, keyIndex)
 	{
-
-		return this.setHelper(key, value, 0);
+		
 	}
 
-	private setHelper (key, value, keyIndex)
+	public set (key, value, keyIndex = 0)
 	{
 		if (keyIndex == key.length)
 		{
@@ -99,7 +90,7 @@ export class ArrayMap {
 			else
 			{
 				let nextNode = new ArrayMap();
-				nextNode.setHelper(key, value, keyIndex+1);
+				nextNode.set(key, value, keyIndex+1);
 				
 				var currentElement = key[keyIndex];
 				this._choices.set(currentElement, nextNode);
