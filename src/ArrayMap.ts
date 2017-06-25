@@ -38,8 +38,15 @@ export class ArrayMap {
 
 	/******** METHODS ********/
 
-	public get (key, keyIndex)
+	public get (key, test)
 	{
+		if (test !== undefined) console.log("test is "+test);
+		return this.getHelper (key, 0);
+	}
+
+	private getHelper (key, keyIndex)
+	{
+		//console.log("get","key = "+key,"\tkeyIndex = "+keyIndex);
 		keyIndex = keyIndex || 0;
 		if (keyIndex == key.length)
 		{
@@ -63,6 +70,7 @@ export class ArrayMap {
 
 	public set (key, value)
 	{
+
 		return this.setHelper(key, value, 0);
 	}
 

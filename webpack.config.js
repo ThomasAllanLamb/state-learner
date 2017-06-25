@@ -1,11 +1,11 @@
 const path = require("path");
 
 const config = {
-  entry: path.join(__dirname, "src/StateLearner.ts"),
+  entry: path.join(__dirname, "src/main.ts"),
   output: {
     filename: "StateLearner.js",
     path: path.join(__dirname, "built"),
-    library: "StateLearner",
+    library: "state-learner",
     libraryTarget: "umd"
   },
   module: {
