@@ -18,12 +18,12 @@ import { StateLine } from "./StateLine";
 
 /******** CONSTRUCTOR ********/
 
-export class StateLearner {
+export class StateLearner <State> {
 
-	constructor (recall)
+	constructor (recall = Infinity)
 	{
 		this.recall = recall || Infinity;
-		this._stateLine = new StateLine();
+		this._stateLine = new StateLine<State>();
 	}
 
 
@@ -32,16 +32,16 @@ export class StateLearner {
 	//Maximum length for a sequence of states to be stored or retrieved
 	public recall:number;
 	//This state learner's state line
-	private _stateLine:StateLine;
+	private _stateLine:StateLine<State>;
 
 
 	/******** METHODS ********/
 
-	public append (state)
+	public append (state:State):State
 	{
 		this._stateLine.add(state);
 
-		return;
+		return state;
 	}
 
 	public makePrediction ():PredictionData

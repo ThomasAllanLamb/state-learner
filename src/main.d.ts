@@ -1,12 +1,16 @@
-declare class PredictionData {
-    constructor (matchLength:number, states:Array) 
-}
-
-declare class StateLearner {
-  constructor ();
-
-  recall:number;
+declare namespace StateLearner {
   
-  append(state:any);
-  makePrediction():PredictionData?;
+  class PredictionData {
+    constructor (matchLength:number, states:Array) 
+  }
+
+  class StateLearner {
+    constructor ();
+
+    recall:number;
+    
+    append(state:any);
+    makePrediction():PredictionData;
+  }
+
 }

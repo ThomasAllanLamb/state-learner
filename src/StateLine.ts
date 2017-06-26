@@ -14,31 +14,33 @@ StateLine
 import { ArrayMap } from "./ArrayMap";
 import { IncidenceMap } from "./IncidenceMap";
 
-export class StateLine 
+export class StateLine<State>
 {
 	/******** CONSTRUCTOR ********/
 
 	constructor ()
 	{
-		this.history = new Array();
-		this._ledger = new ArrayMap();
+		this.history = new Array<State>();
+		this._ledger = new ArrayMap<State, IncidenceMap<State, number>>();
 	}
 
 
 	/******** PROPERTIES ********/
 
 	//Structure of history: history[n] = input of the nth turn*/
-	public history;
+	public history:Array<State>;
 	//Structure of ledger: ledger.get(history fragment) => incidence.get(state N) = number of times that state N occurs after the given "history fragment"
-	private _ledger;
+	private _ledger:ArrayMap<State, IncidenceMap<State, number>>;
 
 
 	/******** METHODS ********/
 
-	public add (state)
+	public add (state:State):State
 	{
+		//start with clone of entire history
 		var historyFragment = this.history.slice(0);
 		
+		//???: each iteration removes an element from historyFragment. exit condition is when historyFragment is empty. Can the loop be refactored to make this clearer?
 		while (true)
 		{
 			//increment the incidence count for the number of times that "historyFragment" has preceded "state"
@@ -61,20 +63,19 @@ export class StateLine
 			if (historyFragment.length == 0)
 			{
 				this.history.push(state);
-				return;
+				return state;
 			}
 			historyFragment.shift();
 		}
-		
 	}
 
-	public incidenceFollowing (sequence)
+	public incidenceFollowing (sequence):IncidenceMap<State, number>
 	{
 		//NOTE: sequence should be an array
 		var incidence = this._ledger.get(sequence);
 		if (incidence == undefined)
 		{
-			return new IncidenceMap();
+			return new IncidenceMap<State, number>();
 		}
 		else
 		{

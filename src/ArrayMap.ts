@@ -16,11 +16,11 @@ import { Entry } from "./Entry";
 
 /******** CONSTRUCTOR ********/
 
-export class ArrayMap {
+export class ArrayMap<K, V> {
 
 	constructor () {
 		//UNF: clone elements? If a person messes with the elements of an array they set to have a value, then discard it and make a fresh one, they will expect .get to return the same value. But since they messed with elements of the array before they got rid of it, the elements of the nodes in this map will have changes and the value the user is looking for will no longer have the same key.
-		this._choices = new Map();
+		this._choices = new Map<K, ArrayMap<K, V>>();
 		this.size = 0;
 	}
 
@@ -28,17 +28,18 @@ export class ArrayMap {
 	/******** PROPERTIES ********/
 
 	//UNF: recalculate .size at the end of .set
-	public size;
+	public size:number;
 	// A map from next elements to ArrayMap objects containing those elements as their leaf. _choices.get(x) === _choices.get(x)._nodeValue
-	private _choices:Map<any, ArrayMap>;
-	//the answer to .get( [] )
-	private _nodeValue;
-	private _isOccupied;
+	private _choices:Map<K, ArrayMap<K, V>>;
+	//the answer to .get( myArray, myArray.length ). Also the answer to .get( [] ) because the second parameter of .get defaults to 0, which is [].length.
+	private _nodeValue:V;
+	private _isOccupied:boolean;
 
 
 	/******** METHODS ********/
 
-	public get (key, keyIndex = 0)
+	//keyIndex is a helper variable. Rather than cloning the array's elements and sending the clone to the next node, we indicate which element that node should treat as the first element.
+	public get (key:Array<K>, keyIndex = 0):V
 	{
 		if (keyIndex == key.length)
 		{
@@ -60,12 +61,8 @@ export class ArrayMap {
 		}
 	}
 
-	private getHelper (key, keyIndex)
-	{
-		
-	}
-
-	public set (key, value, keyIndex = 0)
+	//keyIndex is a helper variable. see note about keyIndex on this.get
+	public set (key:Array<K>, value:V, keyIndex = 0)
 	{
 		if (keyIndex == key.length)
 		{
@@ -89,7 +86,7 @@ export class ArrayMap {
 			}
 			else
 			{
-				let nextNode = new ArrayMap();
+				let nextNode = new ArrayMap<K, V>();
 				nextNode.set(key, value, keyIndex+1);
 				
 				var currentElement = key[keyIndex];
@@ -101,10 +98,8 @@ export class ArrayMap {
 		}
 	}
 
-	public has (key, keyIndex) : boolean
-	{
-		keyIndex = keyIndex || 0;
-		
+	public has (key:Array<K>, keyIndex=0) : boolean
+	{	
 		if (keyIndex == key.length)
 		{
 			return (this._isOccupied);
@@ -124,11 +119,6 @@ export class ArrayMap {
 		}
 	}
 
-	/* IE 6 does not support __defineGetter__
-	Map.prototype.__defineGetter__("size", function () 
-	{
-		return this._data.length;
-	});*/
 	//???
 	public forEach (f)
 	{
@@ -149,7 +139,7 @@ export class ArrayMap {
 		
 		if (this._choices.size > 0)
 		{
-			//!!!inefficient conversion of  to native style
+			//!!!: inefficient conversion of  to native style
 			this._choices.forEach(function (value, key, map)
 				{
 					baseKey.push(entry.key);
@@ -235,10 +225,9 @@ export class ArrayMap {
 			size++;
 		}
 		
-		this._choices.forEach(function (key, value)
-			{
+		this._choices.forEach(function (value, key) {
 				size += value.size;
-			});
+		});
 		
 		this.size = size;
 	}

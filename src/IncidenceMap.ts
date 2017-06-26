@@ -16,7 +16,7 @@ IncidenceMap
 
 /******* CONSTRUCTOR *******/
 
-export class IncidenceMap {
+export class IncidenceMap<K, V> {
 
 	constructor () {
 		this._map = new Map();
@@ -32,9 +32,8 @@ export class IncidenceMap {
 
 	/******* METHODS *******/
 
-	public increment (key, times)
+	public increment (key, times=1)
 	{
-		times = (times == undefined)? 1 : times;
 		var count = this.set(key, this.get(key)+times);
 		return count;
 	}
