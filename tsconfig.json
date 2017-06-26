@@ -1,12 +1,11 @@
 {
   "compilerOptions": {
-    "outDir": "./built"
-    , "noImplicitReturns": true
+    "noImplicitReturns": true
     , "target": "es6"
     //, "declaration": true
   },
 
   "files": [
-    "./src/StateLearner.ts"
+    "./src/main.ts"
   ]
 }
